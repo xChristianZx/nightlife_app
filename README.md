@@ -1,0 +1,1 @@
+# Nightlife app for FCC Fullstack project
