@@ -1,12 +1,42 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const request = require("request");
+const keys = require("./config/keys");
+
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static("views"));
+app.set("view engine", "html");
 
 app.get("/", (req, res) => {
-  res.send("BUY MY NIGHTLIFE APP");
+  console.log(req);
+  res.render("index");
 });
+
+app.post("/", (req, res) => {
+  console.log(req.body);
+  const location = req.body.location;
+  // Get Request //
+
+  const YELP_API_ENDPOINT = "https://api.yelp.com/v3/businesses/search?";
+  const uriOptions = `term=bars&location=${location}&limit=1`;
+  const reqOptions = {
+    auth: {
+      bearer: keys.yelpAPIKEY
+    }
+  };
+
+  request.get(YELP_API_ENDPOINT + uriOptions, reqOptions, (err, resp, body) => {
+    console.log(err);
+    console.log(resp.statusCode);
+    console.log(body);
+    res.json(body);
+  });
+});
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Serving on ${PORT}`);
