@@ -15,7 +15,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static("views"));
+// app.use(express.static("views"));
+app.use(express.static("public"));
 app.set("view engine", "html");
 
 // === Routes === //
@@ -45,20 +46,17 @@ app.post("/", (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  //TEMP SETUP
-  //   app.use(express.static("client/build"));
-  app.use(express.static("views"));
+  app.use(express.static("client/build"));
 
   // Express will serve up the index.html file
   // if it doesn't recognize the route
 
-  // TEMP SETUP
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "views", "index.html"));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Serving on ${PORT}`);
