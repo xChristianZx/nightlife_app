@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import styles from "./App.css";
+import Search from "./containers/Search/Search";
 
 class App extends Component {
   render() {
     return (
       <div className={styles.App}>
-        <form action="/" method="post">
-          <input type="text" for="/" name="location" />
-          <input type="submit" />
-        </form>
+        <Search />
       </div>
     );
   }
