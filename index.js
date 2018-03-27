@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
+const path = require("path");
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 
@@ -42,6 +43,20 @@ app.post("/", (req, res) => {
     res.send(body);
   });
 });
+
+if (process.env.NODE_ENV === "production") {
+  //TEMP SETUP
+  //   app.use(express.static("client/build"));
+  app.use(express.static("views"));
+
+  // Express will serve up the index.html file
+  // if it doesn't recognize the route
+
+  // TEMP SETUP
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "views", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 3000;
 
