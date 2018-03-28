@@ -26,8 +26,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body);
   const location = req.body.location;
+  console.log(req.body);
+  console.log("location: ", req.body.location);
 
   const YELP_API_ENDPOINT = "https://api.yelp.com/v3/businesses/search?";
   const uriOptions = `term=bars&location=${location}&limit=1`;
