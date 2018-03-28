@@ -9,6 +9,11 @@ class Search extends Component {
     input: ""
   };
 
+  // temporary
+  componentDidMount() {
+    this.props.fetchData("Oakland");
+  }
+
   handleChange = e => {
     this.setState({ input: e.target.value });
   };
@@ -20,7 +25,7 @@ class Search extends Component {
     this.setState({ input: "" });
   };
 
-  render() {    
+  render() {
     return (
       <div className={styles.container}>
         <h2>Where are you going tonight?</h2>

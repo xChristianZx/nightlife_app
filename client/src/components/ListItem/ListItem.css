@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  margin: 1rem auto;
+  padding: 1rem;
+  list-style: none;
+  border: 1px solid red;
+  flex: 1; }
+  .container img {
+    width: 15vw;
+    height: auto;
+    object-fit: fill; }
+  .container a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer; }

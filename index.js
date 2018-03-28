@@ -30,11 +30,10 @@ app.post("/", (req, res) => {
   console.log(req.body);
   console.log("location: ", req.body.location);
 
-  // number of businesses to return via "limit"
-  const dataSize = 10;
+  const listSize = 10;
 
   const YELP_API_ENDPOINT = "https://api.yelp.com/v3/businesses/search?";
-  const uriOptions = `term=bars&location=${location}&limit=${dataSize}`;
+  const uriOptions = `term=bars&location=${location}&limit=${listSize}`;
   const reqOptions = {
     auth: {
       bearer: keys.yelpAPIKEY

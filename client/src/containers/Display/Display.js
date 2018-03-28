@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import styles from "./Display.css";
 import { connect } from "react-redux";
+import ListItem from "../../components/ListItem/ListItem";
 
 class Display extends Component {
   renderList = cityData => {
-    const name = cityData.name;
-    return <li key={cityData.id}>{name}</li>;
+    return <ListItem key={cityData.id} data={cityData} />;
   };
 
   render() {
