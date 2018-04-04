@@ -7,34 +7,46 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const cookieSession = require("cookie-session");
 const keys = require("./config/keys");
+
 require("./models/User");
+require("./services/passport");
 
 const app = express();
 
-// // === Mongoose === //
-// mongoose.Promise = global.Promise;
+// === Mongoose === //
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 // === Express Middleware === //
+
+//Parse HTTP JSON bodies
 app.use(bodyParser.json());
+//Parse URLEncoded params
 app.use(bodyParser.urlencoded({ extended: true }));
+//Cookie Session Config
 app.use(
   cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000, // equals 30days
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
     keys: [keys.cookieKey]
   })
 );
 
-app.use(express.static("public"));
+// app.use(express.static("public"));
+// app.set("views", path.join(__dirname + "/views"));
+// app.use(express.static("./views"));
+app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Auth Routes (REFACTOR)
+require("./routes/index")(app);
+
 // === Routes === //
 app.get("/", (req, res) => {
-  console.log(req);
   res.render("index");
+  console.log(req.user);
 });
 
 app.post("/", (req, res) => {
