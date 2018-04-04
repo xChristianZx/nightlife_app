@@ -3,21 +3,33 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const path = require("path");
 const mongoose = require("mongoose");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const cookieSession = require("cookie-session");
 const keys = require("./config/keys");
+require("./models/User");
 
 const app = express();
 
 // // === Mongoose === //
 // mongoose.Promise = global.Promise;
-// mongoose.connect(keys.mongoURI, { useMongoClient: true });
+mongoose.connect(keys.mongoURI);
 
 // === Express Middleware === //
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000, // equals 30days
+    keys: [keys.cookieKey]
+  })
+);
 
-// app.use(express.static("views"));
 app.use(express.static("public"));
 app.set("view engine", "html");
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // === Routes === //
 app.get("/", (req, res) => {
@@ -60,7 +72,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
   console.log(`Serving on ${PORT}`);
 });
