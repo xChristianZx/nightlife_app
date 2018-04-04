@@ -1,5 +1,16 @@
-.container {
-  border: 1px solid gray;
+.wrapper {
+  // border: 1px solid gray;
   padding: 1rem;
   margin: auto;
+  background-color: rgba(7, 78, 185, 0.5);
+  color: white;
+}
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  margin: 0 auto;
 }

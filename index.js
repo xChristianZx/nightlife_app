@@ -41,9 +41,9 @@ app.post("/", (req, res) => {
   };
 
   request.get(YELP_API_ENDPOINT + uriOptions, reqOptions, (err, resp, body) => {
-    console.log(err);
-    console.log(resp.statusCode);
-    console.log(body);
+    // console.log(err);
+    // console.log(resp.statusCode);
+    // console.log(body);
     res.send(body);
   });
 });

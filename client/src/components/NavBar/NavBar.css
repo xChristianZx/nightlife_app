@@ -5,7 +5,8 @@
   align-items: stretch;
   width: 100%;
   height: auto;
-  background-color: papayawhip; }
+  background-color: #042e6d;
+  color: white; }
 
 .content {
   display: flex;
@@ -26,4 +27,5 @@
     margin: 0 auto;
     padding: 0 1rem; }
     .routesContainer li a {
+      color: white;
       cursor: pointer; }

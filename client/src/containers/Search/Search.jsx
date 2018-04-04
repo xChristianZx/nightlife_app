@@ -27,17 +27,28 @@ class Search extends Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        <h2>Where are you going tonight?</h2>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-            placeholder="Oakland, San Francisco, Austin"
-          />
-          <input type="submit" value="Submit" />
-        </form>
+      <div className={styles.wrapper}>
+        <div className={`${styles.container}`}>
+          <h2 className={""}>Where are you going tonight?</h2>
+
+          <form
+            className={`${styles.form} ui form`}
+            onSubmit={this.handleSubmit}
+          >
+            <div className="inline field">
+              <input
+                className={"ui input"}
+                type="text"
+                value={this.state.value}
+                onChange={this.handleChange}
+                placeholder={`Oakland, San Francisco, Austin`}
+              />
+              <button className={`ui button primary`} type="submit">
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

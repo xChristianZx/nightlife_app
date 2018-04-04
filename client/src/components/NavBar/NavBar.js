@@ -8,7 +8,6 @@ const NavBar = () => {
         <div className={styles.logoContainer}>
           <h2>uNight</h2>
         </div>
-
         <ul className={styles.routesContainer}>
           <li>
             <a>Login</a>

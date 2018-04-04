@@ -15,9 +15,11 @@ class Display extends Component {
     return (
       <div className={styles.container}>
         <ul>
-          {!!this.props.data
-            ? this.props.data.businesses.map(this.renderList)
-            : null}
+          {!!this.props.data ? (
+            this.props.data.businesses.map(this.renderList)
+          ) : (
+            <div>Loading...</div>
+          )}
         </ul>
       </div>
     );
