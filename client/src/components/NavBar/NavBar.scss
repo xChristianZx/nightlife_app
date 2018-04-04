@@ -14,9 +14,13 @@
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  padding: 0 1rem;
+  width: 60%;
+  padding: 0.5em 1em;
   margin: 0 auto;
+}
+
+.logoContainer h2 {
+  color: white;
 }
 
 .routesContainer {
@@ -30,6 +34,7 @@
     margin: 0 auto;
     padding: 0 1rem;
     & a {
+      font-size: 1.25em;
       color: white;
       cursor: pointer;
     }

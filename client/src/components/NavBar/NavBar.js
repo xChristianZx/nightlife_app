@@ -1,19 +1,22 @@
 import React from "react";
 import styles from "./NavBar.css";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.logoContainer}>
-          <h2>uNight</h2>
+          <Link to="/">
+            <h2>uNight</h2>
+          </Link>
         </div>
         <ul className={styles.routesContainer}>
           <li>
-            <a>Login</a>
+            <Link to="/login">Login</Link>
           </li>
           <li>
-            <a>Register</a>
+            <Link to="/register">Register</Link>
           </li>
         </ul>
       </div>

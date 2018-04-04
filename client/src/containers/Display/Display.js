@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Display.css";
 import { connect } from "react-redux";
 import ListItem from "../../components/ListItem/ListItem";
+import Search from "../Search/Search";
 
 class Display extends Component {
   renderList = cityData => {
@@ -13,14 +14,17 @@ class Display extends Component {
     console.log(this.props.data);
     // console.log(this.props.data.length);
     return (
-      <div className={styles.container}>
-        <ul>
-          {!!this.props.data ? (
-            this.props.data.businesses.map(this.renderList)
-          ) : (
-            <div>Loading...</div>
-          )}
-        </ul>
+      <div>
+        <Search />
+        <div className={styles.container}>
+          <ul>
+            {!!this.props.data ? (
+              this.props.data.businesses.map(this.renderList)
+            ) : (
+              <div>Loading...</div>
+            )}
+          </ul>
+        </div>
       </div>
     );
   }

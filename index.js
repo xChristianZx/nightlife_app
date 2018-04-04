@@ -13,17 +13,17 @@ require("./services/passport");
 
 const app = express();
 
-// === Mongoose === //
+// === Mongoose connect to MLab === //
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 // === Express Middleware === //
 
-//Parse HTTP JSON bodies
+// Parse HTTP JSON bodies
 app.use(bodyParser.json());
-//Parse URLEncoded params
+// Parse URLEncoded params
 app.use(bodyParser.urlencoded({ extended: true }));
-//Cookie Session Config
+// Cookie Session Config
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
@@ -31,11 +31,11 @@ app.use(
   })
 );
 
-// app.use(express.static("public"));
+app.use(express.static("public"));
 // app.set("views", path.join(__dirname + "/views"));
 // app.use(express.static("./views"));
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
+// app.engine("html", require("ejs").renderFile);
+// app.set("view engine", "html");
 
 app.use(passport.initialize());
 app.use(passport.session());

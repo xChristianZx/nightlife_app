@@ -23,6 +23,7 @@ module.exports = app => {
     res.redirect("/");
   });
 
+  // == LogIn == //
   app.get("/login", (req, res) => {
     res.render("login");
   });
@@ -35,6 +36,7 @@ module.exports = app => {
     })
   );
 
+  // == LogOut == //
   app.get("/logout", (req, res) => {
     console.log(req.user);
     req.logout();
