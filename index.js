@@ -35,12 +35,12 @@ app.use(express.static("public"));
 // app.set("views", path.join(__dirname + "/views"));
 // app.use(express.static("./views"));
 // app.engine("html", require("ejs").renderFile);
-// app.set("view engine", "html");
+app.set("view engine", "html");
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Auth Routes (REFACTOR)
+//Auth Routes (TO BE REFACTORED)
 require("./routes/index")(app);
 
 // === Routes === //

@@ -28,13 +28,10 @@ module.exports = app => {
     res.render("login");
   });
 
-  app.post(
-    "/login",
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/login"
-    })
-  );
+  app.post("/login", passport.authenticate("local"), (req, res) => {
+    console.log(req.user);
+    res.send(req.user.username);
+  });
 
   // == LogOut == //
   app.get("/logout", (req, res) => {
