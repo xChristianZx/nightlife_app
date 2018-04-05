@@ -3,9 +3,9 @@ import styles from "./App.css";
 // import Search from "./containers/Search/Search";
 import NavBar from "./components/NavBar/NavBar";
 import Display from "./containers/Display/Display";
+import Login from "./containers/Login/Login";
 import { BrowserRouter, Route } from "react-router-dom";
 
-const LogIn = () => <div>LOGIN!</div>;
 const LogOut = () => <div>You are now logged out!</div>;
 const Register = () => <div>Register</div>;
 
@@ -19,7 +19,7 @@ class App extends Component {
             {/* <Display /> */}
             <NavBar />
             <Route exact path="/" component={Display} />
-            <Route path="/login" component={LogIn} />
+            <Route path="/login" component={Login} />
             <Route path="/logout" component={LogOut} />
             <Route path="/register" component={Register} />
           </div>

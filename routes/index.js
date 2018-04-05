@@ -30,7 +30,9 @@ module.exports = app => {
 
   app.post("/login", passport.authenticate("local"), (req, res) => {
     console.log(req.user);
-    res.send(req.user.username);
+    // sending mongo's _id and username
+    const { _id, username } = req.user;
+    res.send({ _id, username });
   });
 
   // == LogOut == //
