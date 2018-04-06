@@ -4,7 +4,7 @@ import styles from "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Display from "./containers/Display/Display";
 import Login from "./containers/Login/Login";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const LogOut = () => <div>You are now logged out!</div>;
 const Register = () => <div>Register</div>;
@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className={styles.App}>
-        <BrowserRouter>
+        <Router>
           <div>
             {/* <Search /> */}
             {/* <Display /> */}
@@ -23,7 +23,7 @@ class App extends Component {
             <Route path="/logout" component={LogOut} />
             <Route path="/register" component={Register} />
           </div>
-        </BrowserRouter>
+        </Router>
       </div>
     );
   }
