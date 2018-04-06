@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  margin: auto;
+  padding: 1rem;
+  flex: 1; }
