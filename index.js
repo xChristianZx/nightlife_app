@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
   const location = req.body.location;
   console.log(req.body);
-  console.log("location: ", req.body.location);
+  // console.log("location: ", req.body.location);
 
   const listSize = 10;
 
