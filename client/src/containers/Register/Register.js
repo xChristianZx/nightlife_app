@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import RegisterForm from "../../components/RegisterForm/RegisterForm";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchUser } from "../../actions/index";
+import { registerUser } from "../../actions/index";
 import { Route, Redirect } from "react-router-dom";
-import LoginForm from "../../components/LoginForm/LoginForm";
 
-class Login extends Component {
+class Register extends Component {
   state = {
+    firstname: "",
+    lastname: "",
     username: "",
     password: ""
   };
@@ -18,21 +20,27 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { username, password } = this.state;
+    const { firstname, lastname, username, password } = this.state;
+    const trimFirst = firstname.trim();
+    const trimLast = lastname.trim();
     const trimUser = username.trim();
     const trimPassword = password.trim();
-    this.props.fetchUser({ username: trimUser, password: trimPassword });
-    this.setState({ username: "", password: "" });
+    this.props.registerUser({
+      firstname: trimFirst,
+      lastname: trimLast,
+      username: trimUser,
+      password: trimPassword
+    });
+    this.setState({ firstname: "", lastname: "", username: "", password: "" });
   };
 
   render() {
-    console.log("auth", this.props.auth);
     return (
       <Route>
-        {this.props.auth.user ? (
+        {this.props.auth.isLoggedIn ? (
           <Redirect to="/" />
         ) : (
-          <LoginForm
+          <RegisterForm
             {...this.state}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
@@ -48,7 +56,7 @@ function mapStateToProps({ auth }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchUser }, dispatch);
+  return bindActionCreators({ registerUser }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

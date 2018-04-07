@@ -37,11 +37,25 @@ export const userLogout = user => async dispatch => {
   try {
     const res = await axios.get("/logout", user);
     console.log(res);
-    dispatch({ type: FETCH_USER_LOGOUT, payload: res.data.msg });
+    dispatch({ type: FETCH_USER_LOGOUT });
   } catch (err) {
     dispatch({
       type: FETCH_USER_ERROR,
       error: "There was an error logging out. Please try again"
+    });
+  }
+};
+
+export const registerUser = user => async dispatch => {
+  dispatch({ type: FETCH_USER_REQUEST });
+  try {
+    const res = await axios.post("/register", user);
+    dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: FETCH_USER_ERROR,
+      error: err.response.data.message
     });
   }
 };

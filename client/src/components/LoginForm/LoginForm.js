@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./LoginForm.css";
+import { Link } from "react-router-dom";
 
 const LoginForm = props => {
   const { handleChange, handleSubmit } = props;
@@ -19,6 +20,10 @@ const LoginForm = props => {
           <a href="/">Back</a>
           <input className="ui button primary right floated" type="submit" />
         </form>
+      </div>
+      <div>
+        Not a member?{` `}
+        <Link to="/register">Register</Link>
       </div>
     </div>
   );

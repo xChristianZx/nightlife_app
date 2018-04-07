@@ -4,10 +4,10 @@ import styles from "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Display from "./containers/Display/Display";
 import Login from "./containers/Login/Login";
+import Register from "./containers/Register/Register";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const LogOut = () => <div>You are now logged out!</div>;
-const Register = () => <div>Register</div>;
 
 class App extends Component {
   render() {

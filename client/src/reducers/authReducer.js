@@ -27,7 +27,7 @@ export default function(
       return Object.assign({}, state, {
         isFetching: false,
         isLoggedIn: false,
-        msg: action.payload,
+        msg: null,
         user: null
       });
     default:
