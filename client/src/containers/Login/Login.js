@@ -29,7 +29,7 @@ class Login extends Component {
     console.log("auth", this.props.auth);
     return (
       <Route>
-        {this.props.auth ? (
+        {this.props.auth.user ? (
           <Redirect to="/" />
         ) : (
           <LoginForm

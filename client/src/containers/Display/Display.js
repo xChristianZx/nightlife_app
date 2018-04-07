@@ -10,20 +10,16 @@ class Display extends Component {
   };
 
   render() {
-    // console.log(this.props);
-    // console.log(this.props.data);
-    // console.log(this.props.data.length);
+    const { data, isFetching } = this.props.data;
     return (
       <div>
         <Search />
         <div className={styles.container}>
-          <ul>
-            {!!this.props.data ? (
-              this.props.data.businesses.map(this.renderList)
-            ) : (
-              <div>Loading...</div>
-            )}
-          </ul>
+          {data === null || isFetching ? (
+            <div className="ui active loader text">Loading...</div>
+          ) : (
+            <ul>{data.businesses.map(this.renderList)}</ul>
+          )}
         </div>
       </div>
     );

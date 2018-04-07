@@ -1,27 +1,56 @@
-import React from "react";
+import React, { Component } from "react";
 import styles from "./NavBar.css";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-const NavBar = () => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <div className={styles.logoContainer}>
-          <Link to="/">
-            <h2>uNight</h2>
-          </Link>
-        </div>
-        <ul className={styles.routesContainer}>
-          <li>
+class NavBar extends Component {
+  renderNavLink = () => {
+    switch (this.props.auth.user) {
+      case null:
+        return [
+          <li key={"1"}>
             <Link to="/login">Login</Link>
-          </li>
-          <li>
+          </li>,
+          <li key={"2"}>
             <Link to="/register">Register</Link>
           </li>
-        </ul>
+        ];
+      default:
+        return [
+          <li key={"3"}>
+            <p>Welcome {this.props.auth.user.username}!</p>
+          </li>,
+          <li key={"4"}>
+            <a>Logout</a>
+          </li>
+        ];
+    }
+  };
+  render() {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.content}>
+          <div className={styles.logoContainer}>
+            <Link to="/">
+              <h2>uNight</h2>
+            </Link>
+          </div>
+          <ul className={styles.routesContainer}>
+            {/* <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li> */}
+            {this.renderNavLink()}
+          </ul>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
+function mapStateToProps({ auth }) {
+  return { auth };
+}
 
-export default NavBar;
+export default connect(mapStateToProps)(NavBar);
