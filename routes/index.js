@@ -9,18 +9,19 @@ module.exports = app => {
   });
 
   app.post("/register", (req, res) => {
-    const { username, password } = req.body;
-    const newUser = new User({ username });
+    const { firstname, lastname, username, password } = req.body;
+    const newUser = new User({ username, firstname, lastname });
     User.register(newUser, password, (err, user) => {
       if (err) {
-        throw err;
-        return res.redirect("register");
+        console.log(err);
+        return res.status(400).send(err);
       }
       passport.authenticate("local")(req, res, () => {
-        res.redirect("/");
+        console.log("here i am", req.user);
+        const { username, _id, firstname, lastname } = req.user;
+        return res.send({ _id, username, firstname, lastname });
       });
     });
-    res.redirect("/");
   });
 
   // == LogIn == //
