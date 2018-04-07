@@ -16,9 +16,12 @@ class NavBar extends Component {
             <p>Welcome {user.username}!</p>
           </li>,
           <li key={"4"}>
-            <span onClick={() => this.props.userLogout(user.username)}>
+            <Link
+              to="/logout"
+              onClick={() => this.props.userLogout(user.username)}
+            >
               Logout
-            </span>
+            </Link>
           </li>
         ];
       default:
