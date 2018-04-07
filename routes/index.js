@@ -29,7 +29,7 @@ module.exports = app => {
   });
 
   app.post("/login", passport.authenticate("local"), (req, res) => {
-    console.log(req.user);
+    console.log(`LOGGED IN - ${req.user.username}`);
     // sending mongo's _id and username
     const { _id, username } = req.user;
     res.send({ _id, username });
@@ -37,8 +37,9 @@ module.exports = app => {
 
   // == LogOut == //
   app.get("/logout", (req, res) => {
-    console.log(req.user);
+    console.log(`LOGGED OUT - ${req.user.username}`);
+    const logoutMsg = `${req.user.username} has been successfully logged out.`;
     req.logout();
-    res.redirect("/");
+    res.send({ msg: logoutMsg });
   });
 };

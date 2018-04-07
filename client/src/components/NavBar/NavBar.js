@@ -2,26 +2,32 @@ import React, { Component } from "react";
 import styles from "./NavBar.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { userLogout } from "../../actions/index";
+import { bindActionCreators } from "redux";
 
 class NavBar extends Component {
   renderNavLink = () => {
-    switch (this.props.auth.user) {
-      case null:
+    const { isLoggedIn, user } = this.props.auth;
+
+    switch (isLoggedIn) {
+      case true:
+        return [
+          <li key={"3"}>
+            <p>Welcome {user.username}!</p>
+          </li>,
+          <li key={"4"}>
+            <span onClick={() => this.props.userLogout(user.username)}>
+              Logout
+            </span>
+          </li>
+        ];
+      default:
         return [
           <li key={"1"}>
             <Link to="/login">Login</Link>
           </li>,
           <li key={"2"}>
             <Link to="/register">Register</Link>
-          </li>
-        ];
-      default:
-        return [
-          <li key={"3"}>
-            <p>Welcome {this.props.auth.user.username}!</p>
-          </li>,
-          <li key={"4"}>
-            <a>Logout</a>
           </li>
         ];
     }
@@ -49,8 +55,13 @@ class NavBar extends Component {
     );
   }
 }
+
 function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(NavBar);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ userLogout }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
