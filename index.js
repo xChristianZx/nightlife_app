@@ -31,46 +31,15 @@ app.use(
   })
 );
 
-app.use(express.static("public"));
-// app.set("views", path.join(__dirname + "/views"));
-// app.use(express.static("./views"));
-// app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Auth Routes (TO BE REFACTORED)
-require("./routes/index")(app);
+// app.use(express.static("public"));
+// app.engine("html", require("ejs").renderFile);
 
 // === Routes === //
-app.get("/", (req, res) => {
-  res.render("index");
-  console.log(req.user);
-});
-
-app.post("/", (req, res) => {
-  const location = req.body.location;
-  console.log(req.body);
-  // console.log("location: ", req.body.location);
-
-  const listSize = 10;
-
-  const YELP_API_ENDPOINT = "https://api.yelp.com/v3/businesses/search?";
-  const uriOptions = `term=bars&location=${location}&limit=${listSize}`;
-  const reqOptions = {
-    auth: {
-      bearer: keys.yelpAPIKEY
-    }
-  };
-
-  request.get(YELP_API_ENDPOINT + uriOptions, reqOptions, (err, resp, body) => {
-    // console.log(err);
-    // console.log(resp.statusCode);
-    // console.log(body);
-    res.send(body);
-  });
-});
+require("./routes/searchRoutes")(app);
+require("./routes/authRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
