@@ -9,6 +9,7 @@ const cookieSession = require("cookie-session");
 const keys = require("./config/keys");
 
 require("./models/User");
+require("./models/Venue");
 require("./services/passport");
 
 const app = express();
