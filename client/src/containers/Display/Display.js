@@ -6,7 +6,13 @@ import Search from "../Search/Search";
 
 class Display extends Component {
   renderList = cityData => {
-    return <ListItem key={cityData.id} data={cityData} />;
+    return (
+      <ListItem
+        key={cityData.id}
+        data={cityData}
+        isLoggedIn={this.props.auth.isLoggedIn}
+      />
+    );
   };
 
   render() {
@@ -18,7 +24,7 @@ class Display extends Component {
           {data === null || isFetching ? (
             <div className="ui active loader text">Loading...</div>
           ) : (
-            <ul>{data.businesses.map(this.renderList)}</ul>
+            <ul className={styles.list_container}>{data.businesses.map(this.renderList)}</ul>
           )}
         </div>
       </div>
@@ -26,8 +32,8 @@ class Display extends Component {
   }
 }
 
-function mapStateToProps({ data }) {
-  return { data };
+function mapStateToProps({ data, auth }) {
+  return { data, auth };
 }
 
 export default connect(mapStateToProps)(Display);

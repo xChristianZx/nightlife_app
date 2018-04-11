@@ -2,15 +2,18 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;
-  width: 60%;
+  align-items: space-between;
+  width: 55%;
   min-height: 40vh;
   margin: 0 auto;
   padding: 1rem;
-  flex: 1;
+  // flex: 1;
   // border: 1px solid black;
-  & ul {
-    padding: 0;
-    width: 100%;
-  }
+}
+.list_container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  padding: 1rem;
 }
