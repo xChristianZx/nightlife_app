@@ -32,10 +32,13 @@
     cursor: pointer;
   }
 }
-
-// .image_container {
-//   height: 60%;
-// }
+#attendance_btn {
+  background-color: #21ba45;
+  color: white;
+  &:hover {
+    background-color: #db2828;
+  }
+}
 
 .content {
   display: flex;

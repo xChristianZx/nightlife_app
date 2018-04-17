@@ -26,6 +26,12 @@
     color: inherit;
     cursor: pointer; }
 
+#attendance_btn {
+  background-color: #21ba45;
+  color: white; }
+  #attendance_btn:hover {
+    background-color: #db2828; }
+
 .content {
   display: flex;
   flex-flow: column nowrap;
