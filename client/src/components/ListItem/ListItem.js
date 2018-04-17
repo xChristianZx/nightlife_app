@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ListItem.css";
 
-const ListItem = ({ data, auth, addUserToAttending }) => {
+const ListItem = ({ data, auth, addUser, removeUser }) => {
   // id is yelp_id
   const { name, image_url, url, id, usersAttending } = data;
   const { isLoggedIn, user } = auth;
@@ -15,20 +15,18 @@ const ListItem = ({ data, auth, addUserToAttending }) => {
   const attendanceBtn = () => {
     if (isLoggedIn && !isAttending()) {
       return (
-        <button
-          className="tiny ui button primary"
-          onClick={() => addUserToAttending(id)}
-        >
-          RSVP YES!
+        <button className="tiny ui button primary" onClick={() => addUser(id)}>
+          Go!
         </button>
       );
     } else if (isLoggedIn && isAttending()) {
       return (
-        <div id={`${styles.attendance_btn}`} className={`ui animated button`}>
-          <div
-            className="visible content"
-            // onClick={() => removeUserFromAttending(id)}
-          >
+        <div
+          id={`${styles.attendance_btn}`}
+          className={`ui animated button`}
+          onClick={() => removeUser(id)}
+        >
+          <div className="visible content">
             Going!{"  "} <i className="icon check" />
           </div>
           <div className="hidden content">
@@ -42,7 +40,6 @@ const ListItem = ({ data, auth, addUserToAttending }) => {
     }
   };
 
-  console.log(isAttending());
   return (
     <li className={styles.container}>
       <img src={image_url} alt={name} />

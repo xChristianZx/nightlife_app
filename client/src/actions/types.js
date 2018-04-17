@@ -9,7 +9,7 @@ export const FETCH_USER_SUCCESS = "fetch_user_success";
 export const FETCH_USER_ERROR = "fetch_user_error";
 export const FETCH_USER_LOGOUT = "fetch_user_logout";
 
-// == USER REGISTRATION ==//
-// export const REGISTER_USER_REQUEST = "register_user_request";
-// export const REGISTER_USER_SUCESS = "register_user_success";
-// export const REGISTER_USER_ERROR = "register_user_error";
+// == VENUE ATTENDANCE == //
+export const VENUE_ADD_USER = "venue_add_user";
+export const VENUE_REMOVE_USER = "venue_remove_user";
+export const VENUE_RSVP_ERROR = "venue_rsvp_error";

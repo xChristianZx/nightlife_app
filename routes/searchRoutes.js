@@ -4,11 +4,12 @@ const Venue = require("../models/Venue");
 
 module.exports = app => {
   // == LOCATION SEARCH == //
-  app.post("/venue", (req, res) => {
-    const location = req.body.location;
-    console.log(req.body);
-    // console.log("location: ", req.body.location);
-    const listSize = 4;
+  app.get("/venue/:location", (req, res) => {
+    // const location = req.body.location;
+    const location = req.params.location;
+    console.log("Body", req.body);
+    console.log("PARAMS: ", req.params);
+    const listSize = 10;
     const YELP_URL = "https://api.yelp.com/v3/businesses/search?";
     const uriOptions = `term=bars&location=${location}&limit=${listSize}`;
     const baseURL = YELP_URL + uriOptions;
@@ -20,7 +21,6 @@ module.exports = app => {
     // Request to Yelp
     request.get(baseURL, reqOptions, async (err, resp, body) => {
       try {
-        // console.log(body.businesses);
         const yelp_res = await JSON.parse(body).businesses;
         const savedVenues = await getSavedVenues();
         const updatedYelp = await yelp_res.map((biz, i) => {
@@ -28,6 +28,8 @@ module.exports = app => {
           newObj.usersAttending = [];
           return newObj;
         });
+
+        // Add usersAttending to yelp_response
         const finalRes = updatedYelp.map(biz => {
           savedVenues.forEach(venue => {
             if (biz.id === venue.yelp_id) {
@@ -37,32 +39,13 @@ module.exports = app => {
           return biz;
         });
         res.send(JSON.stringify(finalRes));
-        // const work = await updatedYelp();
-        console.log("***************");
-        console.log("PLEASE: ", updatedYelp);
-        console.log("PLEASE 2: ", JSON.stringify(finalRes));
-        // console.log(savedVenues);
+        // console.log("***************");
+        // console.log("PLEASE: ", updatedYelp);
+        // console.log("PLEASE 2: ", finalRes);
       } catch (err) {
         console.log(err);
       }
-      // res.send(finalRes);
     });
-  });
-
-  app.get("/venue", (req, res) => {
-    Venue.findOne({ yelp_id: "56DA3F3GkqOrMrLozTJvkQ" }, (err, venue) => {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(venue.createdBy);
-    });
-    // .populate("usersAttending")
-    // .exec((err, users) => {
-    //   if (err) {
-    //     return console.log(err);
-    //   }
-    //   console.log("USERS!", users);
-    // });
   });
 
   // == ADD ATTENDEE == //
@@ -79,17 +62,40 @@ module.exports = app => {
         await newVenue.usersAttending.push(_user);
         const savedVenue = await newVenue.save();
         console.log("NewVenue and Attendee: ", savedVenue);
-        res.redirect("/");
+        return res.send(savedVenue);
       } else {
         //True - Add user
-        console.log("Found the venue!:", venue);
+        console.log("Found the venue:", venue);
         await venue.usersAttending.push(_user);
-        await venue.save();
-        res.redirect("/");
+        const savedVenue = await venue.save();
+        return res.send(savedVenue);
       }
     } catch (err) {
       console.log(err);
     }
+  });
+
+  // == REMOVE ATTENDEE == //
+  app.put("/venue/user", (req, res) => {
+    const { yelp_id, _user } = req.body;
+    console.log("======= REMOVE ATTENDEE ========");
+    console.log("Yelp_id: ", yelp_id);
+    console.log("User_id: ", _user, typeof _user);
+
+    Venue.findOne({ yelp_id }, (err, venue) => {
+      if (err) {
+        return console.log(err);
+      }
+      // if only one user left, then remove whole document
+      if (venue.usersAttending.length <= 1) {
+        venue.remove();
+        const remVen = venue.save();
+        return res.sendStatus(200);
+      }
+      // Remove user
+      venue.update({ $pull: { usersAttending: _user } }).exec();
+      return res.sendStatus(200);
+    });
   });
 };
 

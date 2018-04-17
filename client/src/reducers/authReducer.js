@@ -5,7 +5,7 @@ import {
   FETCH_USER_LOGOUT
 } from "../actions/types";
 
-export default function(
+export default function (
   state = { user: null, isLoggedIn: false, isFetching: false, msg: null },
   action
 ) {
