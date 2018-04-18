@@ -38,10 +38,7 @@ module.exports = app => {
           });
           return biz;
         });
-        res.send(JSON.stringify(finalRes));
-        // console.log("***************");
-        // console.log("PLEASE: ", updatedYelp);
-        // console.log("PLEASE 2: ", finalRes);
+        res.send(JSON.stringify(finalRes));        
       } catch (err) {
         console.log(err);
       }

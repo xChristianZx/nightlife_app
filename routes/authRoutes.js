@@ -3,11 +3,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 module.exports = app => {
-  // Will be react-router handled
-  app.get("/register", (req, res) => {
-    res.render("register");
-  });
-
+  // == Register == //
   app.post("/register", (req, res) => {
     const { firstname, lastname, username, password } = req.body;
     const newUser = new User({ username, firstname, lastname });
@@ -25,10 +21,6 @@ module.exports = app => {
   });
 
   // == LogIn == //
-  app.get("/login", (req, res) => {
-    res.render("login");
-  });
-
   app.post("/login", passport.authenticate("local"), (req, res) => {
     console.log(`LOGGED IN - ${req.user.username}`);
     // sending mongo's _id and username
