@@ -38,7 +38,7 @@ class Display extends Component {
   render() {
     const { data, isFetching } = this.props.data;
     return (
-      <div>
+      <div className={styles.wrapper}>
         <Search />
         <div className={styles.container}>
           {data === null || isFetching ? (

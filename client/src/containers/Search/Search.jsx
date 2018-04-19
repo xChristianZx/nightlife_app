@@ -28,9 +28,7 @@ class Search extends Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <div className={`${styles.container}`}>
-          <h2 className={""}>Where are you going tonight?</h2>
-
+        <div className={`${styles.container}`}>          
           <form
             className={`${styles.form} ui form`}
             onSubmit={this.handleSubmit}

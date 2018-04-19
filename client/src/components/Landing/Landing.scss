@@ -1,0 +1,24 @@
+.hero_wrapper {
+  background: url("https://res.cloudinary.com/zenpicscloud/image/upload/c_scale,e_art:incognito,q_50,w_1920/v1524080321/scott-warman-525554-unsplash.jpg");
+  background-size: cover;
+  background-position: 50%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: space-between;
+  width: 100vw;
+//   min-height: 90vh;
+  margin: 0;
+  padding: 1rem;
+  flex: 1 0 auto;
+}
+.hero_container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  & h1 {
+    font-size: 2rem;
+    color: white;
+  }
+}

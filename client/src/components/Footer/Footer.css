@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+  flex-shrink: 0;
+  width: 100vw;
+  min-height: 5vh;
+  background: #2d5085; }
+
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  color: white;
+  margin: 1rem auto; }
