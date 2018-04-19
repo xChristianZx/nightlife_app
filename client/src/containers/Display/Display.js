@@ -35,20 +35,28 @@ class Display extends Component {
     );
   };
 
-  render() {
+  renderDisplay = () => {
     const { data, isFetching } = this.props.data;
+    if (data === null && isFetching) {
+      return <div className="ui active loader text">Loading...</div>;
+    } else if (data === null && !isFetching) {
+      return (
+        <div className="ui message">
+          <p>Please input a city or location</p>
+        </div>
+      );
+    } else {
+      return (
+        <ul className={styles.list_container}>{data.map(this.renderList)}</ul>
+      );
+    }
+  };
+
+  render() {
     return (
       <div className={styles.wrapper}>
         <Search />
-        <div className={styles.container}>
-          {data === null || isFetching ? (
-            <div className="ui active loader text">Loading...</div>
-          ) : (
-            <ul className={styles.list_container}>
-              {data.map(this.renderList)}
-            </ul>
-          )}
-        </div>
+        <div className={styles.container}>{this.renderDisplay()}</div>
       </div>
     );
   }
