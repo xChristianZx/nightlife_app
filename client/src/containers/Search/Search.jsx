@@ -1,18 +1,14 @@
 import React, { Component } from "react";
-import styles from "./Search.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchData } from "../../actions/index";
+import { Route, Redirect } from "react-router-dom";
+import SearchForm from "../../components/SearchForm/SearchForm";
 
 class Search extends Component {
   state = {
     input: ""
   };
-
-  // temporary
-  componentDidMount() {
-    this.props.fetchData("Oakland");
-  }
 
   handleChange = e => {
     this.setState({ input: e.target.value });
@@ -26,28 +22,19 @@ class Search extends Component {
   };
 
   render() {
+    const { isFetching } = this.props.data;
     return (
-      <div className={styles.wrapper}>
-        <div className={`${styles.container}`}>          
-          <form
-            className={`${styles.form} ui form`}
-            onSubmit={this.handleSubmit}
-          >
-            <div className="inline field">
-              <input
-                className={"ui input"}
-                type="text"
-                value={this.state.value}
-                onChange={this.handleChange}
-                placeholder={`Oakland, San Francisco, Austin`}
-              />
-              <button className={`ui button primary`} type="submit">
-                Search
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <Route>
+        {isFetching ? (
+          <Redirect to="/venues" />
+        ) : (
+          <SearchForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            value={this.state.input}
+          />
+        )}
+      </Route>
     );
   }
 }
@@ -56,4 +43,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchData }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Search);
+function mapStateToProps({ data }) {
+  return { data };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
