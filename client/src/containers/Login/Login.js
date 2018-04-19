@@ -30,7 +30,7 @@ class Login extends Component {
     return (
       <Route>
         {this.props.auth.user ? (
-          <Redirect to="/" />
+          <Redirect to="/venues" />
         ) : (
           <LoginForm
             {...this.state}

@@ -17,8 +17,8 @@ class App extends Component {
         <Router>
           <div className={styles.content_wrapper}>
             <NavBar />
-            <Route exact path="/" component={Display} />
-            <Route path="/landing" component={Landing} />
+            <Route exact path="/" component={Landing} />
+            <Route path="/venues" component={Display} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={LogOut} />
             <Route path="/register" component={Register} />

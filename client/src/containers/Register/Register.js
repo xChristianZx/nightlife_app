@@ -38,7 +38,7 @@ class Register extends Component {
     return (
       <Route>
         {this.props.auth.isLoggedIn ? (
-          <Redirect to="/" />
+          <Redirect to="/venues" />
         ) : (
           <RegisterForm
             {...this.state}
