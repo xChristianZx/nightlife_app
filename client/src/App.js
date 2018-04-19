@@ -7,8 +7,7 @@ import Register from "./containers/Register/Register";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Landing from "./components/Landing/Landing";
 import Footer from "./components/Footer/Footer";
-
-const LogOut = () => <div>You are now logged out!</div>;
+import LogOut from "./components/LogOut/LogOut";
 
 class App extends Component {
   render() {
