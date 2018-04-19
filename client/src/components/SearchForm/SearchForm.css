@@ -1,12 +1,5 @@
 .wrapper {
   padding: 1rem;
   margin: auto;
+  width: 50%;
   color: white; }
-
-.container {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 50vw;
-  margin: 0 auto; }
