@@ -23,6 +23,7 @@ module.exports = app => {
       try {
         const yelp_res = await JSON.parse(body).businesses;
         const savedVenues = await getSavedVenues();
+        // Add usersAttending property to yelp response
         const updatedYelp = await yelp_res.map((biz, i) => {
           const newObj = Object.assign({}, biz);
           newObj.usersAttending = [];
@@ -38,7 +39,7 @@ module.exports = app => {
           });
           return biz;
         });
-        res.send(JSON.stringify(finalRes));        
+        res.send(JSON.stringify(finalRes));
       } catch (err) {
         console.log(err);
       }
@@ -97,11 +98,19 @@ module.exports = app => {
 };
 
 function getSavedVenues() {
-  return Venue.find({}, (err, venues) => {
-    console.log("VENUE LIST: ", venues);
-    console.log("------------------------");
-    return venues;
-  });
+  // This returns venues with attendees and 
+  // returns the "refs" for User
+  return Venue.find({})
+    .populate("usersAttending")
+    .then(venues => {
+      return venues;
+    })
+    .catch(err => console.log(err));
+  // return Venue.find({}, (err, venues) => {
+  //   console.log("VENUE LIST: ", venues);
+  //   console.log("------------------------");
+  //   return venues;
+  // });
 }
 
 // Save for now
@@ -110,17 +119,17 @@ function getSavedVenues() {
 //   const newYelp = yelp_res.map((biz, i) => {
 //     const newObj = Object.assign({}, biz);
 //     newObj.usersAttending = [];
-//     // console.log(`BIZ ${i}:`, biz);
+//     console.log(`BIZ ${i}:`, biz);
 
-//     // savedVenues.map(venue => {
-//     //   console.log("VENUE YELP_ID: ", venue.yelp_id);
-//     //   console.log("VENUE USERSATTENDING: ", venue.usersAttending);
-//     //   console.log("BIZ_ID: ", biz.id);
-//     //   console.log("=======================");
-//     //   if (biz.id === venue.yelp_id) {
-//     //     return newObj.usersAttending.concat(...venue.usersAttending);
-//     //   }
-//     // });
+//     savedVenues.map(venue => {
+//       console.log("VENUE YELP_ID: ", venue.yelp_id);
+//       console.log("VENUE USERSATTENDING: ", venue.usersAttending);
+//       console.log("BIZ_ID: ", biz.id);
+//       console.log("=======================");
+//       if (biz.id === venue.yelp_id) {
+//         return newObj.usersAttending.concat(...venue.usersAttending);
+//       }
+//     });
 //     return newObj;
 //   });
 //   resolve(newYelp);

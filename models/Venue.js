@@ -13,4 +13,4 @@ const VenueSchema = new Schema({
 
 // _user will be the first attendee for a venue
 
-module.exports = mongoose.model("Venues", VenueSchema);
+module.exports = mongoose.model("Venue", VenueSchema);
