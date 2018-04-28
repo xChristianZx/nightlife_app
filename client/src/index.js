@@ -8,10 +8,6 @@ import { createStore, applyMiddleware, compose } from "redux";
 import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 import { createLogger } from "redux-logger";
-import axios from "axios";
-
-//Temp for testing
-window.axios = axios;
 
 const logger = createLogger();
 
