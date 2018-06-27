@@ -7,6 +7,8 @@ module.exports = app => {
   app.post("/register", (req, res) => {
     const { firstname, lastname, username, password } = req.body;
     const newUser = new User({ username, firstname, lastname });
+    
+    // .register is convenience method provided by passport-local-mongoose
     User.register(newUser, password, (err, user) => {
       if (err) {
         console.log(err);
