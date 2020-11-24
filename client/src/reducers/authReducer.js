@@ -2,10 +2,10 @@ import {
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
   FETCH_USER_ERROR,
-  FETCH_USER_LOGOUT
-} from "../actions/types";
+  FETCH_USER_LOGOUT,
+} from '../actions/types';
 
-export default function (
+export default function authReducer(
   state = { user: null, isLoggedIn: false, isFetching: false, msg: null },
   action
 ) {
@@ -16,19 +16,19 @@ export default function (
       return Object.assign({}, state, {
         isFetching: false,
         isLoggedIn: true,
-        user: action.payload
+        user: action.payload,
       });
     case FETCH_USER_ERROR:
       return Object.assign({}, state, {
         isFetching: false,
-        msg: action.error
+        msg: action.error,
       });
     case FETCH_USER_LOGOUT:
       return Object.assign({}, state, {
         isFetching: false,
         isLoggedIn: false,
         msg: null,
-        user: null
+        user: null,
       });
     default:
       return state;
