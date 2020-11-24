@@ -1,15 +1,15 @@
-import React from "react";
-import styles from "./RegisterForm.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styles from './RegisterForm.module.scss';
+import { Link } from 'react-router-dom';
 
-const RegisterForm = props => {
+const RegisterForm = (props) => {
   const {
     handleChange,
     handleSubmit,
     firstname,
     lastname,
     username,
-    password
+    password,
   } = props;
   return (
     <div className={styles.wrapper}>

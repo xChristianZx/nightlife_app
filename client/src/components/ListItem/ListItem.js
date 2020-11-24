@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./ListItem.css";
+import React from 'react';
+import styles from './ListItem.module.scss';
 
 const ListItem = ({ data, auth, addUser, removeUser }) => {
   // id is yelp_id
@@ -27,10 +27,10 @@ const ListItem = ({ data, auth, addUser, removeUser }) => {
           onClick={() => removeUser(id)}
         >
           <div className="visible content">
-            Going!{"  "} <i className="icon check" />
+            Going!{'  '} <i className="icon check" />
           </div>
           <div className="hidden content">
-            Not Going {"  "}
+            Not Going {'  '}
             <i className="icon times" />
           </div>
         </div>

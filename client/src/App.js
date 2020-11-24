@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import styles from "./App.css";
-import NavBar from "./components/NavBar/NavBar";
-import Display from "./containers/Display/Display";
-import Login from "./containers/Login/Login";
-import Register from "./containers/Register/Register";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Landing from "./components/Landing/Landing";
-import Footer from "./components/Footer/Footer";
-import LogOut from "./components/LogOut/LogOut";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import styles from './App.module.scss';
+import NavBar from './components/NavBar/NavBar';
+import Display from './containers/Display/Display';
+import Login from './containers/Login/Login';
+import Register from './containers/Register/Register';
+import Landing from './components/Landing/Landing';
+import Footer from './components/Footer/Footer';
+import LogOut from './components/LogOut/LogOut';
 
 class App extends Component {
   render() {
