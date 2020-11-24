@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import styles from "./Display.css";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { venueAddUser, venueRemoveUser } from "../../actions/index";
-import ListItem from "../../components/ListItem/ListItem";
-import Search from "../Search/Search";
+import React, { Component } from 'react';
+import styles from './Display.module.scss';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { venueAddUser, venueRemoveUser } from '../../actions/index';
+import ListItem from '../../components/ListItem/ListItem';
+import Search from '../Search/Search';
 
 class Display extends Component {
-  toggleUserRSVP = yelp_id => {
+  toggleUserRSVP = (yelp_id) => {
     const user_id = this.props.auth.user._id;
     const newAttendee = {
       yelp_id,
-      _user: user_id
+      _user: user_id,
     };
     return newAttendee;
   };
 
-  addUser = yelp_id => {
+  addUser = (yelp_id) => {
     this.props.venueAddUser(this.toggleUserRSVP(yelp_id));
   };
-  removeUser = yelp_id => {
+  removeUser = (yelp_id) => {
     this.props.venueRemoveUser(this.toggleUserRSVP(yelp_id));
   };
 
-  renderList = cityData => {
+  renderList = (cityData) => {
     return (
       <ListItem
         key={cityData.id}

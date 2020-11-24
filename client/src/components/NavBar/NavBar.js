@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import styles from "./NavBar.css";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { userLogout } from "../../actions/index";
-import { bindActionCreators } from "redux";
+import React, { Component } from 'react';
+import styles from './NavBar.module.scss';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userLogout } from '../../actions/index';
+import { bindActionCreators } from 'redux';
 
 class NavBar extends Component {
   renderNavLink = () => {
@@ -12,26 +12,26 @@ class NavBar extends Component {
     switch (isLoggedIn) {
       case true:
         return [
-          <li key={"3"}>
+          <li key={'3'}>
             <p>Welcome {user.username}!</p>
           </li>,
-          <li key={"4"}>
+          <li key={'4'}>
             <Link
               to="/logout"
               onClick={() => this.props.userLogout(user.username)}
             >
               Logout
             </Link>
-          </li>
+          </li>,
         ];
       default:
         return [
-          <li key={"1"}>
+          <li key={'1'}>
             <Link to="/login">Login</Link>
           </li>,
-          <li key={"2"}>
+          <li key={'2'}>
             <Link to="/register">Register</Link>
-          </li>
+          </li>,
         ];
     }
   };

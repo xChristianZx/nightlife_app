@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./LoginForm.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styles from './LoginForm.module.scss';
+import { Link } from 'react-router-dom';
 
-const LoginForm = props => {
+const LoginForm = (props) => {
   const { handleChange, handleSubmit } = props;
   return (
     <div className={styles.wrapper}>

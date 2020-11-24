@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./SearchForm.css";
+import React from 'react';
+import styles from './SearchForm.module.scss';
 
-const SearchForm = props => {
+const SearchForm = (props) => {
   const { handleChange, handleSubmit, value } = props;
   return (
     <div className={styles.wrapper}>
